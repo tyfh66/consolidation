@@ -8,7 +8,7 @@ from protocol import Protocol
 class Server:
     """A very simple server that listens for incoming client connections
     whilst accepting user input. Uses the Protocol class to format messages,
-    send and recieve data.
+    send and receive data.
     """
 
     def __init__(self, address, port):
@@ -26,8 +26,8 @@ class Server:
                 msg = input("Send command to client:")
                 if msg:
                     self.protocol.send(connection, msg)
-                    msg = self.protocol.recieve(connection)
-                    logging.info("Recieved from client: %s", msg)
+                    msg = self.protocol.receive(connection)
+                    logging.info("Received from client: %s", msg)
 
             except socket.error as comms_error:
                 logging.error(

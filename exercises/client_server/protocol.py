@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 
 class Protocol:
     """A simple example protocol demostrating how struct could be used
-    to help manage the sending and recieving of messages.
+    to help manage the sending and receiving of messages.
 
     """
 
@@ -32,17 +32,17 @@ class Protocol:
         logger.info("Sending the message: %s", final_msg)
         sock.sendall(final_msg)
 
-    def recieve(self, sock):
+    def receive(self, sock):
         """Strips the 4 byte header and unpacks it in order to get
         the length of the message."""
         header = self.raw_receive(sock, self.header_len)
-        logger.info("Recieved message header: %s", header)
+        logger.info("Received message header: %s", header)
         if not header:
             return None
         msg_len = struct.unpack('>I', header)[0]
-        logger.info("Recieved message length: %s", msg_len)
+        logger.info("Received message length: %s", msg_len)
         msg = self.raw_receive(sock, msg_len)
-        logger.info("Recieved message: %s", msg)
+        logger.info("Received message: %s", msg)
         return msg.decode()
 
     def raw_receive(self, sock, msg_len):

@@ -15,12 +15,12 @@ class Client:
         self.protocol = Protocol()
 
     def handle_messages(self, connection: socket.socket):
-        """Uses the Protocol class to recieve a message then
+        """Uses the Protocol class to receive a message then
         respond to the server that sent it with the same message.
         """
         while True:
             try:
-                cmd = self.protocol.recieve(connection)
+                cmd = self.protocol.receive(connection)
                 if cmd:
                     self.protocol.send(connection, cmd)
                 else:
