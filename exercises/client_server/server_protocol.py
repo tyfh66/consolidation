@@ -6,7 +6,7 @@ from protocol import Protocol
 
 
 class Server:
-    """A very simple server that listens for incomming client connections
+    """A very simple server that listens for incoming client connections
     whilst accepting user input. Uses the Protocol class to format messages,
     send and recieve data.
     """
@@ -42,7 +42,7 @@ class Server:
             self.connections.remove(conn)
 
     def run(self):
-        """Sets up the server socket and listens for incomming client
+        """Sets up the server socket and listens for incoming client
         connections.
         """
         try:
