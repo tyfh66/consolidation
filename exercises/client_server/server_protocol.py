@@ -1,5 +1,4 @@
 import socket
-import threading
 import logging
 import argparse
 from protocol import Protocol
@@ -55,7 +54,7 @@ class Server:
 
         try:
             socket_instance.bind(('', self.port))
-            socket_instance.listen(4)
+            socket_instance.listen(1)
             logging.info('server running')
         except socket.error as socket_error:
             logging.error('Error %s binding socket.', socket_error)
@@ -65,8 +64,7 @@ class Server:
             socket_connection, address = socket_instance.accept()
             logging.info("Client connected: %s", address)
             self.connections.append(socket_connection)
-            threading.Thread(target=self.handle_user_connection, args=[
-                socket_connection]).start()
+            self.handle_user_connection(socket_connection)
 
 
 if __name__ == '__main__':
