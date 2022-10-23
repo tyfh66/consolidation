@@ -1,8 +1,9 @@
+"""Socket server that listens on a specified address and port. The server
+waits for a client connection and forwards messages once connected."""
 import socket
 import logging
 import argparse
 from protocol import Protocol
-
 
 class Server:
     """A very simple server that listens for incoming client connections
@@ -10,7 +11,7 @@ class Server:
     send and receive data.
     """
 
-    def __init__(self, address, port):
+    def __init__(self, address: str, port: int) -> None:
         self.address = address
         self.port = port
         self.connections = []
@@ -25,8 +26,9 @@ class Server:
                 msg = input("Send command to client:")
                 if msg:
                     self.protocol.send(connection, msg)
-                    msg = self.protocol.receive(connection)
-                    logging.info("Received from client: %s", msg)
+                    recieved_msg = self.protocol.receive(connection)
+                if recieved_msg:
+                    logging.info("Received from client: %s", recieved_msg)
 
             except socket.error as comms_error:
                 logging.error(
@@ -40,7 +42,7 @@ class Server:
             conn.close()
             self.connections.remove(conn)
 
-    def run(self):
+    def run(self) -> None:
         """Sets up the server socket and listens for incoming client
         connections.
         """
